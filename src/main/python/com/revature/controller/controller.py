@@ -1,4 +1,5 @@
 import src.main.python.com.revature.service.business as b
+import src.main.python.com.revature.error.io_errors as ioe
 
 class controller:
     def initalize(self, other):
@@ -27,14 +28,21 @@ class controller:
                 password = input()
                 try:
                     self.business.querry_login(username, password)
-                except:
+                except ioe.login_fail_exception as e:
                     print("Failed Login")
+                    self.business.change_state("1")
             elif (self.business.state=="register"):
                 print("----------")
                 print("Username")
                 username = input()
                 print("Password")
                 password = input()
+                try:
+                    self.business.querry_register(username, password)
+                except ioe.registration_fail_exception as e:
+                    print("Failed Registration")
+
+                    self.business.change_state("1")
                 # add code
                 # throw error
             elif (self.business.state=="LoggedIn"):

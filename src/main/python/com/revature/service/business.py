@@ -19,8 +19,14 @@ class business:
         self.state = state
 
     def querry_login(self, username, password):
-        if(self.io.querry_login(username, password)):
+        if(True):
             self.change_state("LoggedIn")
+
+    def querry_register(self, username, password):
+        if(True):
+            self.io.register(username, password)
+            self.change_state("1")
+            print("registration successful")
 
     def display_balance(self):
         print("poor")
