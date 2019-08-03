@@ -21,13 +21,16 @@ class file_handler:
                 raise ioe.login_fail_exception
         return False
 
+    def querry_money(self, username):
+        with open("io/"+username+"/amount.txt", "r") as f:
+            return float(f.read())
+
     def querry_register(self, username):
         with open("io/user.txt", "r") as f:
             data = f.read()
             data = data.split("\n")
             for line in data:
                 line = line.split(",")[0]
-                print(line)
                 if(line == username):
                     return False
         return True
@@ -41,3 +44,15 @@ class file_handler:
             f.write("0")
         with open("io/"+username+"/history.txt", "w") as f:
             f.write("Account Initialization: 0")
+
+    def add_transaction_history(self, username, message):
+        with open("io/"+username+"/history.txt", "a") as f:
+            f.write("\n"+message)
+
+    def querry_transaction_history(self, username):
+        with open("io/"+username+"/history.txt", "r") as f:
+            print(f.read())
+
+    def save_balance(self, username, balance):
+        with open("io/"+username+"/amount.txt", "w") as f:
+            f.write(str(balance))

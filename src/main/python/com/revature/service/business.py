@@ -22,6 +22,8 @@ class business:
     def querry_login(self, username, password):
         if(self.io.querry_login(username,password)):
             self.change_state("LoggedIn")
+            self.user = username
+            self.money = self.io.querry_money(username)
         else:
             raise ioe.login_fail_exception
 
@@ -34,10 +36,40 @@ class business:
             raise ioe.registration_fail_exception
 
     def display_balance(self):
-        print("poor")
+        print("Balance: "+str(self.money))
 
     def display_past_transactions(self):
-        print("poor")
+        self.io.querry_transaction_history(self.user)
 
     def transaction(self, amount):
-        print("poor " + str(amount))
+        self.money += amount
+        self.io.save_balance(self.user, self.money)
+
+    def querry_deposite(self, amount):
+        try:
+            if(amount<0):
+                raise be.negative_transaction_exception
+            else:
+                self.transaction(amount)
+                self.io.add_transaction_history(self.user, "Deposite: "+str(amount))
+        except be.negative_transaction_exception:
+            print("Negative Transaction Exception: Negative Numbers are not Allowed")
+
+        except be.transaction_exception:
+            print("Unknown Transaction Exception: Idk, it broke")
+
+    def querry_withdraw(self, amount):
+        try:
+            if(amount<0):
+                raise be.negative_transaction_exception
+            elif(amount>self.money):
+                raise be.not_enough_money_exception
+            else:
+                self.transaction(-amount)
+                self.io.add_transaction_history(self.user, "Withdraw: "+str(amount))
+        except be.negative_transaction_exception:
+            print("Negative Transaction Exception: Negative Numbers are not Allowed")
+        except be.not_enough_money_exception:
+            print("Not Enough Money for Withdraw")
+        except be.transaction_exception:
+            print("Unknown Transaction Exception: Idk, it broke")

@@ -62,11 +62,11 @@ class controller:
                 elif(data=='3'):
                     print("amount")
                     amount = float(input())
-                    self.business.transaction(amount)
+                    self.business.querry_deposite(amount)
                 elif (data=='4'):
                     print("amount")
-                    amount = -float(input())
-                    self.business.transaction(amount)
+                    amount = float(input())
+                    self.business.querry_withdraw(amount)
             elif(self.business.state=="init"):
                 print("Welcome to Bank Terminal")
                 self.business.change_state("1")
