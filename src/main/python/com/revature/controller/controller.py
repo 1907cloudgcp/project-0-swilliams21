@@ -41,7 +41,6 @@ class controller:
                     self.business.querry_register(username, password)
                 except ioe.registration_fail_exception as e:
                     print("Failed Registration")
-
                     self.business.change_state("1")
                 # add code
                 # throw error
