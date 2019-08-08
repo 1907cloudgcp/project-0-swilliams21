@@ -2,5 +2,3 @@ Admin is an admin
 Deposite: 10000.0
 Deposite: 500000.0
 Withdraw: 50000.0
-Deposite: 1.0
-Deposite: 10.0

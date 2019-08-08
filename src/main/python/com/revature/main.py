@@ -6,7 +6,7 @@ This is your main script, this should call several other scripts within your pac
 import src.main.python.com.revature.service.business as business
 
 def main():
-	print('TO-DO')
+	# print('TO-DO')
 	b = business.business()
 
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
 Account Initialization: 0
 Deposite: 5000.0
 Withdraw: 400.0
+Deposite: 5.0
+Withdraw: 100.0
